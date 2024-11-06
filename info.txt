@@ -1,0 +1,1 @@
+types: weapon, offhand, helmet, gloves, boots, belt, ring, neck, armour, utility, loot.
