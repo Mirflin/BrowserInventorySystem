@@ -1,3 +1,164 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e44ecd038a8dcd8a98a298600782f74aa8654f39dca6a17152f76ffbd92463a4
-size 7656
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="infoDialog" class="disabled">
+        <div id="infoHeader">
+            <div id="infoImage"><img></div>
+            <div id="infoTitle"></div>
+        </div>
+        <div id="infoDescription"></div>
+        <div id="infoTypeDurab">
+            <div id="infoType">Type: <div id="typeValue"></div></div>
+            <div id="infoDurability">Durability: <div id="durabilityValue"></div></div>
+        </div>
+        <div id="infoClose">X</div>
+        <div id="deleteObj">DELETE</div>
+    </div>
+    <div id="inventory" class="">
+        <div id="inventoryHeader">
+            <h1>Inventory</h1>
+        </div>
+
+        <div id="droppedElements">
+            
+        </div>
+
+        <div id="equipmentInventory">
+            <div id="weaponGloves">
+                <div class="justifyRomanianB">
+                    <div class="romanianB">
+                        <div class="buttonI">I</div>
+                        <div class="buttonI">II</div>
+                    </div>
+                </div>
+                <div id="weapon"></div>
+                <div id="gloves"></div>
+            </div>
+            <div id="justifyTrinket">
+                <div id="trinket"></div>
+            </div>
+            <div id="helmetArmourBelt">
+                <div id="helmet"></div>
+                <div id="armour"></div>
+                <div id="belt"></div>
+            </div>
+            <div id="charms2">
+                <div id="charm"></div>
+                <div id="ring"></div>
+            </div>
+            <div id="offhandBoots">
+                <div class="justifyRomanianB">
+                    <div class="romanianB">
+                        <div class="buttonI">I</div>
+                        <div class="buttonI">II</div>
+                    </div>
+                </div>
+                <div id="offhand"></div>
+                <div id="boots"></div>
+            </div>
+        </div>
+        <div id="addItemDialog" class="disabled">
+            <h1>Creating new item</h1>
+            <div id="Dialog">
+                <form>
+                    <!--<label id="rarity" for="dropdown-menu">Rarity: </label> -->
+                    <label id="name" for="nameInput">Name: </label>
+                    <input id="nameInput">
+
+                    <label for="rangeInput" id="durability">Durability: </label>
+                    <input type="range" min="0" max="100" value="100" id="rangeInput">
+                    <span><input id="durabilityValue" value="100"></span>
+
+                    <div id="sizeObj">
+                        <p>Size X(max 3): <input max="3" min="0" value="0" id="ObjX"> </p> 
+                        <p>Size Y(max 4): <input max="4" min="0" value="0" id="ObjY"> </p> 
+                    </div>
+
+                    <p id="typeP">Type: </p>
+                    <div id="typeDropDown">
+                        <button type="button" id="drpdwnBtn" class="dropdown-btn dropdown-toggle" aria-labelledby="dropdownMenuButton" onclick="toggleDropdown()">
+                            Click!
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-element">Loot</a><a href="#" class="dropdown-element">Utility</a><a href="#" class="dropdown-element">Weapon</a><a href="#" class="dropdown-element">Offhand</a><a href="#" class="dropdown-element">Helmet</a><a href="#" class="dropdown-element">Gloves</a><a href="#" class="dropdown-element">Boots</a><a href="#" class="dropdown-element">Belt</a><a href="#" class="dropdown-element">Ring</a><a href="#" class="dropdown-element">Neck</a><a href="#" class="dropdown-element">Armour</a>
+                        </div>
+                    </div>
+
+                    <label id="image" for="nameInput">Image(url): </label>
+                    <input id="imageInput">
+
+                    <p id="description">Description: </p>
+                    <textarea id="descriptionInput" rows="1" placeholder="Description..."></textarea>
+                    <div id="createButtonStyle">
+                        <button type="submit" onclick="createObject()" id="createBtn">CREATE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="inventorySlots">
+            <div id="slotTable">
+                <div class="slot" id="0"></div>
+                <div class="slot" id="1"></div>
+                <div class="slot" id="2"></div>
+                <div class="slot" id="3"></div>
+                <div class="slot" id="4"></div>
+                <div class="slot" id="5"></div>
+                <div class="slot" id="6"></div>
+                <div class="slot" id="7"></div>
+                <div class="slot" id="8"></div>
+                <div class="slot" id="9"></div>
+                <div class="slot" id="10"></div>
+                <div class="slot" id="11"></div>
+                <div class="slot" id="12"></div>
+                <div class="slot" id="13"></div>
+                <div class="slot" id="14"></div>
+                <div class="slot" id="15"></div>
+                <div class="slot" id="16"></div>
+                <div class="slot" id="17"></div>
+                <div class="slot" id="18"></div>
+                <div class="slot" id="19"></div>
+                <div class="slot" id="20"></div>
+                <div class="slot" id="21"></div>
+                <div class="slot" id="22"></div>
+                <div class="slot" id="23"></div>
+                <div class="slot" id="24"></div>
+                <div class="slot" id="25"></div>
+                <div class="slot" id="26"></div>
+                <div class="slot" id="27"></div>
+                <div class="slot" id="28"></div>
+                <div class="slot" id="29"></div>
+                <div class="slot" id="30"></div>
+                <div class="slot" id="31"></div>
+                <div class="slot" id="32"></div>
+                <div class="slot" id="33"></div>
+                <div class="slot" id="34"></div>
+                <div class="slot" id="35"></div>
+                <div class="slot" id="36"></div>
+                <div class="slot" id="37"></div>
+                <div class="slot" id="38"></div>
+                <div class="slot" id="39"></div>
+            </div>
+        </div>
+        <div id="pressF">
+            <h1>Press 'F' for more info</h1>
+        </div>
+        <div id="justifyCenter">
+            <div id="money">
+                <div id="bronze"><div class="coinImage"><img src="https://i.imgur.com/TnaQTQ9.png"></div><input type="text" id="bronzeInput" value="0"></div>
+                <div id="silver"><div class="coinImage"><img src="https://i.imgur.com/wcTQAUB.png"></div><input type="text" id="silverInput" value="0"></div>
+                <div id="gold"><div class="coinImage"><img src="https://i.imgur.com/fpVJvCj.png"></div><input type="text" id="goldInput" value="0"></div>
+            </div>
+        </div>
+        <div class="bottomButtons"><div id="addButton"><p>Add item</p></div></div>
+        <div class="bottomButtons"><div id="saveInventory"><p>Save</p></div></div>
+        <div class="bottomButtons"><div id="loadInventory"><input type="file" id="jsonInput" accept=".json"></div></div>
+    </div>
+    
+</body>
+</html>

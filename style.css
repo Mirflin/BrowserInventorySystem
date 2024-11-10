@@ -1,3 +1,723 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:80c3c35c6efb521708ade895867cba5b13ab5a761691cff6e1fffcd1fc1c11ee
-size 18330
+@font-face {
+    font-family: Exec;
+    src: url(fonts/Exocet2.ttf)
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    transition: 0.3s;
+}
+
+:root{
+    --mainColor: #5C4033;
+    --mainColor2: #483C32;
+    --borderColor: #777777;
+}
+
+.ui-dialog .charsheet {
+    padding: 0;
+    height: 100%;
+}
+body{
+    background-color: var(--mainColor);
+}
+#inventory{
+    font-family: Exec;
+    width: 100%;
+    height: 100%;
+    transform: scale(0.9);
+    transform-origin: top left;
+    position: relative;
+    z-index: 1;
+}
+
+#inventory #inventoryHeader{
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    border-bottom: 0.2rem solid #777777;
+    margin: 0 1.3rem 0;
+    
+}
+#inventory #inventoryHeader h1{
+    margin: 1rem 0;
+    font-size: 3rem;
+    text-align: center;
+    color: #fff;
+}
+
+#inventory #equipmentInventory{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 0.5rem 0 1rem;
+    gap: 1rem;
+}
+#inventory #equipmentInventory #weaponGloves{
+    display: grid;
+    grid-template-columns: 0fr;
+    grid-template-rows: 0fr 0fr 0fr;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    row-gap: 1.8rem;
+}
+#inventory #equipmentInventory #weaponGloves #weapon, #inventory #equipmentInventory #offhandBoots #offhand{
+    width: 12.5rem;
+    height: 19rem;
+    border: 0.2rem solid var(--borderColor);
+    background-color: var(--mainColor2);
+    
+}
+
+#inventory #equipmentInventory #weaponGloves #gloves{
+    width: 12.5rem;
+    height: 12.5rem;
+    background-color: var(--mainColor2);
+    border: 0.2rem solid var(--borderColor);
+}
+#inventory #equipmentInventory #weaponGloves .justifyRomanianB{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+#inventory #equipmentInventory #weaponGloves .justifyRomanianB .romanianB{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+#inventory #equipmentInventory #weaponGloves .justifyRomanianB .romanianB .buttonI{
+    border: 0.2rem solid var(--borderColor);
+    font-size: 1.5rem;
+    background-color: var(--mainColor2);
+    padding: 0.1rem 1.5rem;
+    color: #fff;
+    margin-right: 0.2rem;
+}
+
+#inventory #equipmentInventory #offhandBoots .justifyRomanianB{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    
+}
+#inventory #equipmentInventory #offhandBoots .justifyRomanianB .romanianB{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+#inventory #equipmentInventory #offhandBoots .justifyRomanianB .romanianB .buttonI{
+    border: 0.2rem solid var(--borderColor);
+    font-size: 1.5rem;
+    background-color: var(--mainColor2);
+    padding: 0.1rem 1.5rem;
+    color: #fff;
+    margin-right: 0.2rem;
+}
+#inventory #equipmentInventory #justifyTrinket{
+    display: grid;
+    grid-template-columns: 0fr;
+    align-items: flex-end;
+    margin-bottom: 0rem;
+}
+#inventory #equipmentInventory #justifyTrinket #trinket{
+    border: 0.2rem solid var(--borderColor);
+    background-color: var(--mainColor2);
+    width: 8rem;
+    height: 8rem;
+}
+
+#inventory #equipmentInventory #helmetArmourBelt{
+    display: grid;
+    grid-template-columns: 0fr;
+    grid-template-rows: 0fr 0fr 0fr;
+    flex-direction: column;
+    row-gap: 1.3rem;
+    padding-bottom: 0rem;
+}
+#inventory #equipmentInventory #helmetArmourBelt #helmet{
+    width: 11.5rem;
+    height: 11.5rem;
+    background-color: var(--mainColor2);
+    border: 0.2rem solid var(--borderColor);
+}
+#inventory #equipmentInventory #helmetArmourBelt #armour{
+    width: 11.5rem;
+    height: 15.2rem;
+    border: 0.2rem solid var(--borderColor);
+    background-color: var(--mainColor2);
+}
+#inventory #equipmentInventory #helmetArmourBelt #belt{
+    width: 11.5rem;
+    height: 8rem;
+    border: 0.2rem solid var(--borderColor);
+    background-color: var(--mainColor2);
+}
+#inventory #equipmentInventory #charms2{
+    display: grid;
+    grid-template-columns: 0fr;
+    grid-template-rows: 0fr 0fr;
+    flex-direction: column;
+    margin-top: 6.5rem;
+    row-gap: 15.1rem;
+    height: 100%;
+}
+#inventory #equipmentInventory #charms2 #charm{
+    border: 0.2rem solid var(--borderColor);
+    background-color: var(--mainColor2);
+    width: 8rem;
+    height: 8rem;
+}
+#inventory #equipmentInventory #charms2 #ring{
+    border: 0.2rem solid var(--borderColor);
+    background-color: var(--mainColor2);
+    width: 8rem;
+    height: 8rem;
+}
+
+#inventory #equipmentInventory #offhandBoots{
+    display: grid;
+    grid-template-columns: 0fr;
+    grid-template-rows: 0fr 0fr;
+    flex-direction: column;
+    row-gap: 1.95rem;
+    height: 100%;
+}
+
+#inventory #equipmentInventory #offhandBoots #boots{
+    width: 12.5rem;
+    height: 12.5rem;
+    background-color: var(--mainColor2);
+    border: 0.2rem solid var(--borderColor);
+}
+#inventory #inventorySlots{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0rem;
+}
+#inventory #inventorySlots #slotTable{
+    display: grid;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    grid-template-columns: repeat(10, 0fr);
+    grid-template-rows: repeat(4, 0fr); 
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 2rem;
+    width: 65rem;
+    position: relative;
+}
+#inventory #inventorySlots #slotTable .slot{
+    position: relative;
+    border: 0.1rem solid var(--borderColor);
+    width: 5.8rem;
+    height: 5.8rem;
+    z-index: 1;
+}
+
+#inventory #inventoryStats{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 0 2rem;
+    height: 6rem;
+}
+#inventory #inventoryStats #alert{
+    width: 16rem;
+    text-align: center;
+    color: #8c0000;
+    font-size: 1.5rem;
+    height: 2rem;
+    padding: 0.5rem 0.5rem 0.5rem;
+    margin-bottom: 1rem;
+}
+#inventory #inventoryStats .alert{
+    display: none;
+}
+#inventory #inventoryStats #stats {
+    color: #fff;
+    font-size: 1rem;
+    border: 0.2rem var(--borderColor) solid;
+    background-color: #292929;
+    width: 11rem;
+    text-align: center;
+    height: 5.5rem;
+    margin-bottom: 0.5rem;
+}
+#inventory #inventoryStats #stats p{
+    text-align: center;
+    font-size: 1.5rem;
+}
+#inventory #inventoryStats #stats h1{
+    margin-bottom: 0.5rem;
+}
+#inventory .bottomButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+#inventory .bottomButtons #addButton, #inventory .bottomButtons #saveInventory{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-content: flex-end;
+    width: 10rem;
+    border: 0.1rem solid #fff;
+    padding: 0.2rem 0.2rem;
+    margin-bottom: 1rem;
+    border-radius: 0.2rem;
+    text-align: center;
+    background-color: var(--mainColor);
+}
+#inventory .bottomButtons #loadInventory{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    width: 16rem;
+    height: 2rem;
+    border: 0.1rem solid #fff;
+    padding: 0.2rem 0.2rem;
+    margin-bottom: 1rem;
+    border-radius: 0.2rem;
+    text-align: center;
+    background-color: var(--mainColor);
+}
+#inventory .bottomButtons #addButton:hover, #inventory .bottomButtons #saveInventory:hover, #inventory .bottomButtons #loadInventory:hover{
+    background-color: var(--mainColor2);
+    cursor: pointer;
+}
+
+#inventory #addButton p, #inventory #loadInventory p, #inventory #saveInventory p{
+    width: 100%;
+    text-align: center;
+    color: #59ff3f;
+    font-size: 1.5rem;
+}
+
+#inventory #justifyCenter{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+#inventory #justifyCenter #money{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    width: 35rem;
+    height: 2rem;
+}
+
+#inventory #justifyCenter #money #bronze{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border: 0.2rem solid #ff9a26;
+    width: 8rem;
+    height: 3rem;
+    text-align: center;
+    padding: 0.4rem 0.5rem 0;
+}
+#inventory #justifyCenter #money #bronze .coinImage, #inventory #justifyCenter #money .coinImage, #inventory #justifyCenter #money .coinImage{
+    width: 3rem;
+    height: 3rem;
+    padding:  0 0.2rem 0.2rem;
+}
+#inventory #justifyCenter #money #bronze .coinImage img, #inventory #justifyCenter #money #silver .coinImage img, #inventory #justifyCenter #money #gold .coinImage img{
+    width: 3rem;
+    height: 3rem;
+}
+
+#inventory #justifyCenter #money #silver{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border: 0.2rem solid #959595;
+    width: 8rem;
+    text-align: center;
+    height: 3rem;
+    padding: 0.4rem 0.5rem 0;
+}
+#inventory #justifyCenter #money #gold{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    border: 0.2rem solid #fffb26;
+    width: 8rem;
+    text-align: center;
+    height: 3rem;
+    padding: 0.4rem 0.5rem 0;
+}
+#inventory #justifyCenter #money #bronze input, #inventory #justifyCenter #money #silver input, #inventory #justifyCenter #money #gold input{
+    background-color: var(--mainColor);
+    box-shadow: none;
+    border: none;
+    text-align: center;
+    width: 3.5rem;
+    height: 2rem;
+    margin-left: 1rem;
+    padding:  0 0.2rem 0.2rem;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+#inventory .object{
+    width: 5.8rem;
+    height: 5.8rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+
+#inventory .object2x1{
+    width: 11.6rem;
+    height: 5.8rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+#inventory .object1x2{
+    width: 5.8rem;
+    height: 11.6rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+#inventory .object3x1{
+    width: 17.4rem;
+    height: 5.8rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+#inventory .object1x4{
+    width: 5.8rem;
+    height: 23.5rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+#inventory .object2x2{
+    width: 11.6rem;
+    height: 11.6rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-position: center;
+    background-size: cover;
+}
+#inventory  .object2x3{
+    width: 11.6rem;
+    height: 17.8rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    background-size: cover;
+    transition: opacity 0.2s;
+    background-position: center;
+    
+}
+#inventory  .object1x3{
+    width: 5.8rem;
+    height: 17.8rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+
+
+#inventory #addItemDialog {
+    filter: none !important;
+    position: absolute;
+    z-index: 20;
+    border: 0.1rem solid var(--borderColor);
+    width: 50rem;
+    height: 63rem;
+    background-color: var(--mainColor2);
+    top: 5%;
+    left: 15%;
+    z-index: 20;
+
+}
+
+.opacityBackground{
+    filter: opacity(1);
+}
+
+#inventory #addItemDialog h1{
+    text-align: center;
+    margin: 1rem 1rem 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.1rem solid #fff;
+    color: #fff;
+}
+#inventory #addItemDialog #Dialog{
+    text-align: justify;
+    margin-left: 3rem;
+    color: #fff;
+    
+}
+#inventory #addItemDialog #Dialog form input{
+    margin-bottom: 2rem; 
+}
+#inventory #addItemDialog #Dialog form p{
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+#inventory #addItemDialog #Dialog form #name, #inventory #addItemDialog #Dialog form #description, #inventory #addItemDialog #Dialog form #image{
+    width: auto;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+#inventory #addItemDialog #Dialog form #nameInput,#inventory #addItemDialog #Dialog form #imageInput{
+    width: 20rem;
+    height: 2rem;
+    padding: 0.4rem;
+    font-size: 2rem;
+    margin-right: 7.8rem;
+}
+#inventory #addItemDialog #Dialog form #descriptionInput{
+    width: 30rem;
+    height: 5rem;
+    padding: 0.4rem;
+    font-size: 1.5rem;
+    margin-left: 6rem;
+}
+
+#inventory #addItemDialog #Dialog form #rangeInput{
+    width: 20rem;
+    height: auto;
+    padding: 0;
+}
+#inventory #addItemDialog #Dialog form span #durabilityValue{
+    width: 3.2rem;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+#inventory #addItemDialog #Dialog form #durability{
+    width: 100%;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+#inventory #addItemDialog #Dialog form #rarity,#inventory #addItemDialog #Dialog form #type{
+    width: 100%;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+#inventory #addItemDialog #Dialog form #typeDropDown, #inventory #addItemDialog #Dialog form #rarityDropDown{
+    width: 9rem;
+    margin-bottom: 2rem;
+}
+
+#inventory #addItemDialog #Dialog form #typeDropDown .dropdown-btn , #inventory #addItemDialog #Dialog form #rarityDropDown .dropdown-btn{
+    background-color: var(--mainColor);
+    color: white;
+    padding: 0.7rem 1.3rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    font-family: Exec;
+    width: 20;
+    font-size: 2rem;
+}
+
+#inventory #addItemDialog #Dialog form #typeDropDown .dropdown-menu{
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 9.5rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    text-align: center;
+    border-radius: 0.5rem;
+    margin-top: 0.2rem;
+}
+
+#inventory #addItemDialog #Dialog #typeDropDown .dropdown-element , #inventory #addItemDialog #Dialog form #rarityDropDown .dropdown-element{
+    color: black;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+.active-dropdown{
+    color: rgb(91, 1, 1) !important;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+#inventory #addItemDialog #Dialog form #typeDropDown .dropdown-element:hover , #inventory #addItemDialog #Dialog form #rarityDropDown .dropdown-element:hover{
+    background-color: #ddd;
+}
+
+.disabled{
+    display: none;
+}
+
+#inventory #addItemDialog #Dialog #createButtonStyle{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-end;
+}
+#inventory #addItemDialog #Dialog #createButtonStyle #createBtn{
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-right: 4rem;
+    margin-top: 5rem;
+    background-color: var(--mainColor);
+}
+#inventory #addItemDialog #Dialog form #typeP{
+    margin-bottom: 1rem !important;
+}
+#inventory #addItemDialog #Dialog form #sizeObj p #ObjX ,#inventory #addItemDialog #Dialog form #sizeObj p #ObjY{
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+#inventory #pressF{
+    position: fixed;
+    left: 5%;
+    bottom: 10%;
+    color: #fff;
+}
+#infoDialog{
+    position: absolute;
+    width: 50rem;
+    height: 50rem;
+    background-color: var(--mainColor2);
+    border: 0.2rem solid var(--borderColor);
+    z-index: 100;
+    top: 15%;
+    left: 13.5%;
+}
+#infoDialog #infoHeader{
+    margin-top: 2rem;
+}
+#infoDialog #infoHeader #infoTitle{
+    text-align: center;
+    margin-right: 14rem;
+    font-size: 3rem;
+    font-family: Exec;
+    color: #fff;
+    float: right;
+    margin-top: 6rem;
+}
+#infoDialog #infoHeader #infoImage{
+    float: left;
+    background-size: contain;
+    background-position: center;
+    width: 15rem;
+    height: 15rem;
+    margin-left: 2rem;
+}
+#infoDialog #infoHeader #infoImage img{
+    width: 15rem;
+    height: 15rem;
+}
+#infoDialog #infoDescription{
+    border-top: 0.2rem solid var(--borderColor);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: #fff;
+    font-size: 2rem;
+    margin: 20rem 5rem 0;
+}
+#infoDialog #infoTypeDurab{
+    display: flex;
+    justify-content: space-between;
+    border-top: 0.2rem solid var(--borderColor);
+    margin-left: 2rem;
+    margin-right: 2rem;
+    padding: 2rem 5rem;
+    color: #fff;
+    font-size: 2rem;
+    font-family: Exec;
+}
+#infoDialog #infoClose{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1rem solid var(--borderColor);
+    background-color: #8c0000;
+    width: 3rem;
+    height: 3rem;
+    margin: 5rem 0 0 2rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+#infoDialog #deleteObj{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1rem solid var(--borderColor);
+    font-family: Exec;
+    background-color: #8c0000;
+    width: 10rem;
+    height: 3rem;
+    margin: 2rem 0 0 2rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
