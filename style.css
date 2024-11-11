@@ -478,7 +478,54 @@ body{
     background-size: cover;
     background-position: center;
 }
-
+#inventory  .object3x3{
+    width: 17.8rem;
+    height: 17.8rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+#inventory  .object3x2{
+    width: 17.8rem;
+    height: 11.6rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+#inventory  .object3x4{
+    width: 19rem;
+    height: 25rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+#inventory  .object2x4{
+    width: 11.6rem;
+    height: 23.5rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
 
 #inventory #addItemDialog {
     filter: none !important;

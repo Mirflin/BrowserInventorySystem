@@ -17,7 +17,7 @@ const itemObj = class {
     equipHeight
 }
 
-load() // подгрузка загрузки
+load()
 
 let ObjectList = []
 const weapon = document.querySelector("#weaponGloves .weapon")
@@ -48,23 +48,6 @@ let canSave = true
 let isHovered = false;
 let mouseOn
 
-console.log("Weapon:", weapon);
-console.log("Gloves:", gloves);
-console.log("Trinket:", trinket);
-console.log("Helmet:", helmet);
-console.log("Armour:", armour);
-console.log("Belt:", belt);
-console.log("Charm:", charm);
-console.log("Ring:", ring);
-console.log("Weapon2:", weapon2);
-console.log("Boots:", boots);
-
-console.log("Inventory Slots:");
-inventorySlots.forEach((slot, index) => {
-    console.log('Slot '+index+":", slot);
-});
-
-
 const closeInfo = document.querySelector("#infoClose")
 
 
@@ -73,7 +56,6 @@ closeInfo.addEventListener('click', (event) =>{
 });
 
 addButton.addEventListener("click", function(){
-    console.log(addItemFrame.classList)
     if(addItemFrame.classList == ""){
         console.log("pass")
         addItemFrame.classList.add("disabled")
@@ -90,22 +72,18 @@ const deleteObj = document.querySelector("#deleteObj")
 
 deleteObj.addEventListener('click',(event) =>{
     let object = ObjectList.find(object => object.name == mouseOn.getAttribute("value"))
-    console.log(ObjectList)
     for(let i = 0; i < ObjectList.length;i++){
         if(ObjectList[i].name == object.name){
             console.log("deleted")
             ObjectList[i] = ""
         }
     }
-    console.log(ObjectList)
     document.querySelector(`[value="${object.name}"]`).remove()
     infoDialog.classList.add("disabled")
 
 });
 
 addRangeInput.addEventListener("input", (event) => {
-    console.log(addDurability.value + " dur val")
-    console.log(addRangeInput.value + " range val")
     addDurability.value = addRangeInput.value;
 })
 
@@ -140,7 +118,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     dropzone.forEach(slot => {
         slot.addEventListener('dragover', (event) => {
             event.preventDefault();
-            console.log('Dragging over dropzone');
         });
 
         slot.addEventListener('drop', (event) => {
@@ -149,17 +126,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget; 
-            console.log('Dropped:', data);
-            console.log("ID: "+droppedOnElement.getAttribute("id")+" ")
-            console.log("droped on: "+droppedOnElement)
             const cellRect = droppedOnElement.getBoundingClientRect();
             let Xoffset;
             let Yoffset;
-            console.log(droppedObject.sizeX+" - x "+ droppedObject.sizeY+ " - y")
-
 
             if(checkAvaibility(droppedObject,inventorySlots,droppedOnElement.getAttribute("id"))){
-                console.log(true)
                 draggableElem.style.position = 'absolute';
                 let id = droppedOnElement.getAttribute("id");
                 let sum = parseInt(id)+parseInt(droppedObject.sizeX)
@@ -191,13 +162,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 id = parseInt(id) + parseInt(1)
 
-                console.log(id+" new id "+sum+ " sum" + droppedObject.sizeX + " drag X")
                 draggableElem.style.gridColumn = id;
-
-                console.log(draggableElem.style.gridColumn + " column")
   
-            }else{
-                console.log(false)
             }
         });
 
@@ -212,7 +178,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         weapon.addEventListener('drop', (event) => {
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
-            console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget;
 
@@ -244,7 +209,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         gloves.addEventListener('drop', (event) => {
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
-            console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget;
 
@@ -276,7 +240,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         trinket.addEventListener('drop', (event) => {
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
-            console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget;
 
@@ -308,7 +271,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         helmet.addEventListener('drop', (event) => {
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
-            console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget;
 
@@ -340,7 +302,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         armour.addEventListener('drop', (event) => {
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
-            console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget;
 
@@ -372,7 +333,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         belt.addEventListener('drop', (event) => {
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
-            console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget;
 
@@ -404,7 +364,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         neck.addEventListener('drop', (event) => {
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
-            console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget;
 
@@ -436,7 +395,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ring2.addEventListener('drop', (event) => {
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
-            console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget;
 
@@ -468,7 +426,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         offhand.addEventListener('drop', (event) => {
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
-            console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget;
 
@@ -500,7 +457,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         boots.addEventListener('drop', (event) => {
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
-            console.log(data)
             const droppedObject = JSON.parse(data);
             const droppedOnElement = event.currentTarget;
 
@@ -537,7 +493,6 @@ function equipItem(draggableElem,droppedObject,droppedOnElement){
     console.log(droppedObject.type)
     switch(droppedObject.type){
         case "Weapon":
-            console.log("Weapon moment")
             item.appendChild(draggableElem)
             draggableElem.style.width = 12.5 + 'rem'
             draggableElem.style.height = 19 + 'rem'
@@ -546,7 +501,6 @@ function equipItem(draggableElem,droppedObject,droppedOnElement){
             draggableElem.style.gridColumn = 1
             break;
         case "Gloves":
-            console.log("Gloves moment")
             item.appendChild(draggableElem)
             draggableElem.style.width = 12.5 + 'rem'
             draggableElem.style.height = 12.5 + 'rem'
@@ -586,8 +540,6 @@ let activeDropDownelement;
 dropdownArray.forEach(element => {
     element.addEventListener("click",(event) => {
         const clickedElement = event.target
-        console.log(clickedElement)
-        console.log(activeDropDownelement)
         if(activeDropDownelement == null){
             activeDropDownelement = clickedElement
             activeDropDownelement.classList.add(".active-dropdown")
@@ -614,50 +566,46 @@ function createObject() {
     const parentElement = document.querySelector('#droppedElements')
     const imageUrl = document.querySelector("#imageInput").value
     const inventorySl = document.querySelector("#slotTable")
-
-    console.log("Name:", nameI);
-    console.log("X:", X);
-    console.log("Y:", Y);
-    console.log("Durability:", durabilityI);
-    console.log("Description:", descriptionI);
-    console.log("Rarity:", rarity);
-    console.log("Type:", type);
+    let allOk = true
     
-    ObjectList.push(new itemObj(X,Y,durabilityI,descriptionI,rarity,type,nameI,imageUrl))
-
-    console.log(ObjectList.at(-1))
-    ObjectList.at(-1).width = X*5.8
-    ObjectList.at(-1).height = Y*5.8
-
-    console.log(ObjectList.at(-1).width)
-    console.log(ObjectList.at(-1).height)
-
-    if(X-1 > 0 || Y-1 > 0){
-        newElement.setAttribute("class","object"+X+"x"+Y)
-    }else{
-        newElement.setAttribute("class","object")
-    }
-    newElement.style.backgroundImage = `url("${imageUrl}")`
-    newElement.setAttribute("draggable",true)
-    newElement.setAttribute("value", nameI)
-    makeDraggable(newElement)
-    inventorySl.appendChild(newElement)
-
-    if(addItemFrame.classList == ""){
-        console.log("pass")
-        addItemFrame.classList.add("disabled")
-    }else{
-        console.log("no")
-        addItemFrame.classList.remove("disabled")
+    for(let i = 0; i < ObjectList.length;i++){
+        if(nameI == ObjectList[i].name){
+            allOk = false
+        }
     }
 
-    document.querySelector("#nameInput").value = null
-    document.querySelector("#ObjX").value = null
-    document.querySelector("#ObjY").value = null
-    document.querySelector("#durabilityValue").value = 100
-    document.querySelector("#descriptionInput").value = null
-    document.querySelector("#imageInput").value = null
-    document.querySelector('.dropdown-btn').textContent = "Click!"
+    if(allOk){
+        ObjectList.push(new itemObj(X,Y,durabilityI,descriptionI,rarity,type,nameI,imageUrl))
+
+        console.log(ObjectList.at(-1))
+        ObjectList.at(-1).width = X*5.8
+        ObjectList.at(-1).height = Y*5.8
+
+        if(X-1 > 0 || Y-1 > 0){
+            newElement.setAttribute("class","object"+X+"x"+Y)
+        }else{
+            newElement.setAttribute("class","object")
+        }
+        newElement.style.backgroundImage = `url("${imageUrl}")`
+        newElement.setAttribute("draggable",true)
+        newElement.setAttribute("value", nameI)
+        makeDraggable(newElement)
+        inventorySl.appendChild(newElement)
+
+        if(addItemFrame.classList == ""){
+            addItemFrame.classList.add("disabled")
+        }else{
+            addItemFrame.classList.remove("disabled")
+        }
+
+        document.querySelector("#nameInput").value = null
+        document.querySelector("#ObjX").value = 1
+        document.querySelector("#ObjY").value = 1
+        document.querySelector("#durabilityValue").value = 100
+        document.querySelector("#descriptionInput").value = null
+        document.querySelector("#imageInput").value = null
+        document.querySelector('.dropdown-btn').textContent = "Click!"
+    }
 };
 
 
@@ -675,12 +623,8 @@ function makeDraggable(elem){
     });
 
     element.addEventListener('dragstart', (event) => {
-        console.log('Drag started '+element.getAttribute("value")+" val");
         const value = element.getAttribute("value");
         const foundedObj = ObjectList.find(object => object.name == value);
-        console.log(ObjectList)
-        console.log(foundedObj)
-        console.log(JSON.stringify(foundedObj) + " - json")
         event.dataTransfer.setData('text/plain', JSON.stringify(foundedObj));
         draggableElem = element;
 })
@@ -726,8 +670,6 @@ function checkAvaibility(object,slots,slotId){
     const objectY = object.sizeY
     const slot = slots[slotId]
     let sum = parseInt(slotId)+parseInt(objectX)
-    console.log("slot id: "+slotId+ " objectX: "+objectX+" objectY: "+objectY+" slotId+objectX: "+sum)
-    console.log("stage 0")
 
     const checkArr = Array.from({ length: objectY+1 }, () => new Array(objectX+1).fill(true));;
     
@@ -820,7 +762,7 @@ function load(){
                     });
 
                 } catch (error) {
-                    console.error("Ошибка при парсинге JSON:", error);
+                    console.error("JSON parsing error", error);
                 }
             };
             reader.readAsText(file);
