@@ -622,7 +622,7 @@ function createObject() {
         newElement.setAttribute("draggable",true)
         newElement.setAttribute("value", nameI)
         newElement.style.borderColor = setBorderColor(ObjectList.at(-1))
-        newElement.style.borderWidth = 0.2 + 'rem'
+        newElement.style.borderWidth = 0.4 + 'rem'
         newElement.style.boxSizing = 'border-box'
         makeDraggable(newElement)
         inventorySl.appendChild(newElement)
@@ -772,7 +772,7 @@ function load(){
                         newElement.setAttribute("draggable",true)
                         newElement.setAttribute("value", object.name)
                         newElement.style.borderColor = setBorderColor(object)
-                        newElement.style.borderWidth = 0.2 + 'rem'
+                        newElement.style.borderWidth = 0.4 + 'rem'
                         newElement.style.boxSizing = 'border-box'
                         makeDraggable(newElement)
                         ObjectList.push(object)
