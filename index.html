@@ -73,22 +73,40 @@
 
                     <label for="rangeInput" id="durability">Durability: </label>
                     <input type="range" min="0" max="100" value="100" id="rangeInput">
-                    <span><input id="durabilityValue" value="100"></span>
+                    <span><input id="durabilityValue" value="100" readonly></span>
 
                     <div id="sizeObj">
                         <p>Size X(max 3): <input max="3" min="0" value="1" id="ObjX"> </p> 
                         <p>Size Y(max 4): <input max="4" min="0" value="1" id="ObjY"> </p> 
                     </div>
 
-                    <p id="typeP">Type: </p>
-                    <div id="typeDropDown">
-                        <button type="button" id="drpdwnBtn" class="dropdown-btn dropdown-toggle" aria-labelledby="dropdownMenuButton" onclick="toggleDropdown()">
-                            Click!
-                        </button>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-element">Loot</a><a href="#" class="dropdown-element">Utility</a><a href="#" class="dropdown-element">Weapon</a><a href="#" class="dropdown-element">Offhand</a><a href="#" class="dropdown-element">Helmet</a><a href="#" class="dropdown-element">Gloves</a><a href="#" class="dropdown-element">Boots</a><a href="#" class="dropdown-element">Belt</a><a href="#" class="dropdown-element">Ring</a><a href="#" class="dropdown-element">Neck</a><a href="#" class="dropdown-element">Armour</a>
+                    <div id="DropDown">
+                        <div id="typeDropDown">
+                            <p id="typeP">Type</p>
+                            <button type="button" id="drpdwnBtn" class="dropdown-btn dropdown-toggle" aria-labelledby="dropdownMenuButton" onclick="toggleDropdown()">
+                                Click!
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-element">Loot</a><a href="#" class="dropdown-element">Utility</a><a href="#" class="dropdown-element">Weapon</a><a href="#" class="dropdown-element">Offhand</a><a href="#" class="dropdown-element">Helmet</a><a href="#" class="dropdown-element">Gloves</a><a href="#" class="dropdown-element">Boots</a><a href="#" class="dropdown-element">Belt</a><a href="#" class="dropdown-element">Ring</a><a href="#" class="dropdown-element">Neck</a><a href="#" class="dropdown-element">Armour</a>
+                            </div>
+                        </div>
+                        <div id="rarityDropDown">
+                            <p id="rarityP">Rarity</p>
+                            <button type="button" id="drpdwnBtnRarity" class="dropdown-btn dropdown-toggle" aria-labelledby="dropdownMenuButton" onclick="toggleRarityDropDown()">
+                                Click!
+                            </button>
+                            <div class="dropdown-menu-r">
+                                <a href="#" class="dropdown-element-r" style="background-color: #9a9a9a;">Common</a>
+                                <a href="#" class="dropdown-element-r" style="background-color: #dff917;">Uncommon</a>
+                                <a href="#" class="dropdown-element-r" style="background-color: #178afd;">Rare</a>
+                                <a href="#" class="dropdown-element-r" style="background-color: #911bd0;">Epic</a>
+                                <a href="#" class="dropdown-element-r" style="background-color: #ffa81b;">Master</a>
+                                <a href="#" class="dropdown-element-r" style="background-color: #23ff0b;">Legendary</a>
+                                <a href="#" class="dropdown-element-r" style="background-color: #ff2828;">Unique</a>
+                            </div>
                         </div>
                     </div>
+
 
                     <label id="image" for="nameInput">Image(url): </label>
                     <input id="imageInput">
@@ -145,8 +163,8 @@
                 <div class="slot" id="39"></div>
             </div>
         </div>
-        <div id="pressF">
-            <h1>Press 'F' for more info</h1>
+        <div id="pressF" class="disabled">
+            <h1>Press 'F' on object for more info</h1>
         </div>
         <div id="justifyCenter">
             <div id="money">
@@ -157,7 +175,16 @@
         </div>
         <div class="bottomButtons"><div id="addButton"><p>Add item</p></div></div>
         <div class="bottomButtons"><div id="saveInventory"><p>Save</p></div></div>
-        <div class="bottomButtons"><div id="loadInventory"><input type="file" id="jsonInput" accept=".json"></div></div>
+        <div class="loadButtons">
+            <div id="loadInventory">
+                <label for="jsonInput">Load Inventory</label>
+                <input type="file" id="jsonInput" accept=".json">
+            </div>
+                <div id="loadObject">
+                    <label for="jsonInputOne">Load object</label>
+                    <input type="file" id="jsonInputOne" accept=".json">
+            </div>
+        </div>
     </div>
     
 </body>

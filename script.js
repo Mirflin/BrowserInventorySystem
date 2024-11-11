@@ -18,6 +18,7 @@ const itemObj = class {
 }
 
 load()
+loadObject()
 
 let ObjectList = []
 const weapon = document.querySelector("#weaponGloves .weapon")
@@ -33,8 +34,6 @@ const boots = document.querySelector("#offhandBoots #boots")
 const inventorySlotsContainer = document.getElementById("slotTable");
 const inventorySlots = Array.from(inventorySlotsContainer.children);
 const addButton = document.querySelector("#addButton")
-const addRangeInput = document.querySelector("#rangeInput")
-const addDurability = document.querySelector("#durabilityValue")
 const addValueP = document.querySelector("#valueP")
 const Inventory = document.querySelector("#inventory")
 const typeDropDown = document.querySelector("#typeDropDown")
@@ -42,14 +41,54 @@ const addItemFrame = document.querySelector("#addItemDialog")
 const dropdownMenu = document.querySelector('.dropdown-menu');
 const dropdownButton = document.querySelector('.dropdown-btn');
 const dropdownArray = Array.from(dropdownMenu.children);
+const dropdownrarityMenu = document.querySelector(".dropdown-menu-r")
+const dropdownRarityArray = Array.from(dropdownrarityMenu.children)
 const createBtn = document.querySelector("#createBtn")
 let draggableElem
 let canSave = true
 let isHovered = false;
 let mouseOn
 
-const closeInfo = document.querySelector("#infoClose")
+let activeRarityElement;
 
+dropdownRarityArray.forEach(element =>{
+    const button = document.querySelector("#drpdwnBtnRarity")
+    element.addEventListener('click', (event) =>{
+        activeRarityElement = null;
+        const target = event.target
+        button.textContent = target.textContent
+        button.style.backgroundColor = target.style.backgroundColor
+        if(activeRarityElement == null){
+            activeRarityElement = target
+            dropdownrarityMenu.style.display = 'none'
+        }
+        activeRarityElement = target
+    });
+});
+
+let activeDropDownelement;
+
+dropdownArray.forEach(element => {
+    element.addEventListener("click",(event) => {
+        const clickedElement = event.target
+        activeDropDownelement = null;
+        if(activeDropDownelement == null){
+            activeDropDownelement = clickedElement
+            console.log(activeDropDownelement)
+            activeDropDownelement.classList.add(".active-dropdown")
+        }else{
+            activeDropDownelement.classList.remove(".active-dropdown")
+            activeDropDownelement = clickedElement
+            activeDropDownelement.classList.add(".active-dropdown")
+        }
+        console.log(activeDropDownelement)
+        dropdownButton.textContent = activeDropDownelement.textContent
+    })
+
+});
+
+
+const closeInfo = document.querySelector("#infoClose")
 
 closeInfo.addEventListener('click', (event) =>{
     infoDialog.classList.add("disabled")
@@ -57,15 +96,13 @@ closeInfo.addEventListener('click', (event) =>{
 
 addButton.addEventListener("click", function(){
     if(addItemFrame.classList == ""){
-        console.log("pass")
         addItemFrame.classList.add("disabled")
         Inventory.classList.remove("opacityBackground")
     }else{
-        console.log("no")
         addItemFrame.classList.remove("disabled")
         Inventory.classList.add("opacityBackground")
-        
     }
+    resetCreation()
 });
 
 const deleteObj = document.querySelector("#deleteObj")
@@ -83,13 +120,18 @@ deleteObj.addEventListener('click',(event) =>{
 
 });
 
+const addRangeInput = document.querySelector("#rangeInput")
+const addDurability = document.querySelector("#durabilityValue")
+addDurability.setAttribute("value",addRangeInput.value)
+
+
 addRangeInput.addEventListener("input", (event) => {
     addDurability.value = addRangeInput.value;
 })
 
 addDurability.addEventListener("input", (event) => {
     addRangeInput.value = addDurability.value;
-})
+});
 
 document.addEventListener("keydown", (event) => {
     const infoDialog = document.querySelector("#infoDialog")
@@ -526,6 +568,10 @@ function toggleDropdown() {
     const dropdownMenu = document.querySelector('.dropdown-menu');
     dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
 }
+function toggleRarityDropDown(){
+    const dropdownMenu = document.querySelector('.dropdown-menu-r');
+    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+}
 
 typeDropDown.onclick = function(event) {
     const dropdownButton = document.querySelector('.dropdown-btn');
@@ -535,24 +581,6 @@ typeDropDown.onclick = function(event) {
     }
 }
 
-let activeDropDownelement;
-
-dropdownArray.forEach(element => {
-    element.addEventListener("click",(event) => {
-        const clickedElement = event.target
-        if(activeDropDownelement == null){
-            activeDropDownelement = clickedElement
-            activeDropDownelement.classList.add(".active-dropdown")
-        }else{
-            activeDropDownelement.classList.remove(".active-dropdown")
-            activeDropDownelement = clickedElement
-            activeDropDownelement.classList.add(".active-dropdown")
-        }
-        console.log(activeDropDownelement)
-        dropdownButton.textContent = activeDropDownelement.textContent
-    })
-
-});
 
 function createObject() {
     const nameI = document.querySelector("#nameInput").value
@@ -560,18 +588,22 @@ function createObject() {
     const Y = document.querySelector("#ObjY").value
     const durabilityI = document.querySelector("#durabilityValue").value
     const descriptionI = document.querySelector("#descriptionInput").value
-    const rarity = 1
+    const rarity = activeRarityElement.textContent
     const type = activeDropDownelement.textContent
     const newElement = document.createElement('div');
     const parentElement = document.querySelector('#droppedElements')
     const imageUrl = document.querySelector("#imageInput").value
     const inventorySl = document.querySelector("#slotTable")
     let allOk = true
-    
+
     for(let i = 0; i < ObjectList.length;i++){
         if(nameI == ObjectList[i].name){
             allOk = false
         }
+    }
+
+    if(nameI == "" || X <= 0 || Y <= 0){
+        allOk = false
     }
 
     if(allOk){
@@ -589,8 +621,13 @@ function createObject() {
         newElement.style.backgroundImage = `url("${imageUrl}")`
         newElement.setAttribute("draggable",true)
         newElement.setAttribute("value", nameI)
+        newElement.style.borderColor = setBorderColor(ObjectList.at(-1))
+        newElement.style.borderWidth = 0.2 + 'rem'
+        newElement.style.boxSizing = 'border-box'
         makeDraggable(newElement)
         inventorySl.appendChild(newElement)
+
+
 
         if(addItemFrame.classList == ""){
             addItemFrame.classList.add("disabled")
@@ -598,17 +635,55 @@ function createObject() {
             addItemFrame.classList.remove("disabled")
         }
 
-        document.querySelector("#nameInput").value = null
-        document.querySelector("#ObjX").value = 1
-        document.querySelector("#ObjY").value = 1
-        document.querySelector("#durabilityValue").value = 100
-        document.querySelector("#descriptionInput").value = null
-        document.querySelector("#imageInput").value = null
-        document.querySelector('.dropdown-btn').textContent = "Click!"
+        resetCreation()
+
+    }else{
+        document.querySelector("#name").style.color = "#8c0000"
     }
 };
 
+function setBorderColor(object){
+    switch(object.rarity){
+        case "Common":
+            return '#9a9a9a'
+            break;
+        case "Uncommon":
+            return '#dff917'
+            break;
+        case "Rare":
+            return '#178afd'
+            break;
+        case "Epic":
+            return '#911bd0'
+            break;
+        case "Master":
+            return '#ffa81b'
+            break;
+        case "Legendary":
+            return '#23ff0b'
+            break;
+        case "Unique":
+            return '#ff2828'
+            break;
+    }
+}
 
+function resetCreation(){
+    document.querySelector("#nameInput").value = null
+    document.querySelector("#ObjX").value = 1
+    document.querySelector("#ObjY").value = 1
+    document.querySelector("#durabilityValue").value = 100
+    document.querySelector("#descriptionInput").value = null
+    document.querySelector("#imageInput").value = null
+    document.querySelector('.dropdown-btn').textContent = "Click!"
+    document.querySelector("#name").style.color = "#fff"
+    document.querySelector("#rangeInput").value = 100
+    document.querySelector("#drpdwnBtnRarity").style.backgroundColor = '#'+'5C4033'
+    document.querySelector("#drpdwnBtnRarity").textContent = "Click!"
+    activeRarityElement = null
+    activeDropDownelement = null
+    console.log(document.querySelector("#durabilityValue"))
+}
 
 function makeDraggable(elem){
     const element = elem;
@@ -696,6 +771,9 @@ function load(){
                         newElement.style.backgroundImage = `url("${object.url}")`
                         newElement.setAttribute("draggable",true)
                         newElement.setAttribute("value", object.name)
+                        newElement.style.borderColor = setBorderColor(object)
+                        newElement.style.borderWidth = 0.2 + 'rem'
+                        newElement.style.boxSizing = 'border-box'
                         makeDraggable(newElement)
                         ObjectList.push(object)
                         if(object.sizeX > 0 || object.sizeY > 0){
@@ -769,3 +847,44 @@ function load(){
         }
     });
 }
+
+function loadObject(){
+    document.getElementById("jsonInputOne").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const jsonData = JSON.parse(e.target.result);
+                    if(jsonData.length > 1){
+                        alert("Save file contains multiple objects")
+                    }else{
+                        for(let i = 0; i< ObjectList.length;i++){
+                            if(jsonData.name == ObjectList[i].name){
+                                alert("Object contais same name as you have already")
+                                return 0;
+                            }
+                        }
+                        const newElement = document.createElement('div');
+                        newElement.style.backgroundImage = `url("${object.url}")`
+                        newElement.setAttribute("draggable",true)
+                        newElement.setAttribute("value", object.name)
+                        makeDraggable(newElement)
+
+                        ObjectList.push(object)
+                        if(object.sizeX > 0 || object.sizeY > 0){
+                            newElement.setAttribute("class","object"+(object.sizeX+1)+"x"+(object.sizeY+1))
+                        }else{
+                            newElement.setAttribute("class","object")
+                        }
+                        document.querySelector("#slotTable").appendChild(newElement)
+                    }
+                }catch (error) {
+                    console.error("JSON parsing error", error);
+                }
+            };
+            reader.readAsText(file);
+        }
+    });
+}
+
