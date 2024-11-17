@@ -491,6 +491,30 @@ body{
     background-size: cover;
     background-position: center;
 }
+#inventory  .object4x4{
+    width: 23.2rem;
+    height: 23.2rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
+#inventory  .object5x4{
+    width: 29rem;
+    height: 23.2rem;
+    border: 0.1rem solid #fff;
+    background-color: #fff;
+    position: absolute;
+    cursor: move;
+    z-index: 10;
+    transition: opacity 0.2s;
+    background-size: cover;
+    background-position: center;
+}
 #inventory  .object3x2{
     width: 17.8rem;
     height: 11.6rem;
@@ -735,7 +759,7 @@ body{
 #infoDialog{
     position: absolute;
     width: 50rem;
-    height: 50rem;
+    height: 60rem;
     background-color: var(--mainColor2);
     border: 0.2rem solid var(--borderColor);
     z-index: 100;
@@ -743,19 +767,23 @@ body{
     left: 13.5%;
 }
 #infoDialog #infoHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 2rem;
+    gap: 5rem;
 }
 #infoDialog #infoHeader #infoTitle{
+    width: 23rem;
+    height: 5rem;
     text-align: center;
-    margin-right: 14rem;
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: Exec;
     color: #fff;
-    float: right;
-    margin-top: 6rem;
+    word-wrap: break-word;
+    margin-right: 5rem;
 }
 #infoDialog #infoHeader #infoImage{
-    float: left;
     background-size: contain;
     background-position: center;
     width: 15rem;
@@ -772,7 +800,8 @@ body{
     padding-bottom: 1rem;
     color: #fff;
     font-size: 2rem;
-    margin: 20rem 5rem 0;
+    margin: 1rem 5rem 0;
+    word-wrap: break-word;
 }
 #infoDialog #infoTypeDurab{
     display: flex;
@@ -785,17 +814,41 @@ body{
     font-size: 2rem;
     font-family: Exec;
 }
-#infoDialog #infoClose{
+#infoDialog #XSave{
+    display: flex;
+    justify-content: flex-start;
+}
+#infoDialog #XSave #infoClose{
     display: flex;
     justify-content: center;
     align-items: center;
     border: 0.1rem solid var(--borderColor);
-    background-color: #8c0000;
-    width: 3rem;
+    background-color: #be0303;
+    font-family: Exec;
+    width: 7rem;
     height: 3rem;
     margin: 5rem 0 0 2rem;
     font-size: 2rem;
     cursor: pointer;
+}
+#infoDialog #XSave #infoClose:hover{
+    color: #fff;
+}
+#infoDialog #XSave #infoSave{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1rem solid var(--borderColor);
+    background-color: #59ff3f;
+    width: 7rem;
+    font-family: Exec;
+    height: 3rem;
+    margin: 5rem 0 0 2rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+#infoDialog #XSave #infoSave:hover{
+    color: #fff;
 }
 #infoDialog #deleteObj{
     display: flex;
@@ -806,9 +859,12 @@ body{
     background-color: #8c0000;
     width: 10rem;
     height: 3rem;
-    margin: 2rem 0 0 2rem;
+    margin: 2rem 0 0 5rem;
     font-size: 2rem;
     cursor: pointer;
+}
+#infoDialog #deleteObj:hover{
+    color: #fff;
 }
 #inventory .loadButtons{
     display: flex;

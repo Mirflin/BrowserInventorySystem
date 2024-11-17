@@ -112,7 +112,7 @@ deleteObj.addEventListener('click',(event) =>{
     for(let i = 0; i < ObjectList.length;i++){
         if(ObjectList[i].name == object.name){
             console.log("deleted")
-            ObjectList[i] = ""
+            ObjectList.splice(i,1)
         }
     }
     document.querySelector(`[value="${object.name}"]`).remove()
@@ -132,6 +132,27 @@ addRangeInput.addEventListener("input", (event) => {
 addDurability.addEventListener("input", (event) => {
     addRangeInput.value = addDurability.value;
 });
+
+const infoSave = document.querySelector("#infoSave")
+infoSave.addEventListener('click', (event)=>{
+    const itemName = document.querySelector("#infoTitle").textContent
+    let Item
+    for(let i = 0; i < ObjectList.length;i++){
+        if(ObjectList[i].name == itemName){
+            Item = ObjectList[i]
+        }
+    }
+    const jsonData = JSON.stringify(Item);
+    const base64Data = btoa(jsonData);
+
+    const dataUrl = `data:application/json;base64,${base64Data}`;
+
+    navigator.clipboard.writeText(dataUrl).then(() => {
+        alert("Copied to buffer!");
+      }).catch(err => {
+        alert("Error with coping");
+    });
+})
 
 document.addEventListener("keydown", (event) => {
     const infoDialog = document.querySelector("#infoDialog")
@@ -622,7 +643,7 @@ function createObject() {
         newElement.setAttribute("draggable",true)
         newElement.setAttribute("value", nameI)
         newElement.style.borderColor = setBorderColor(ObjectList.at(-1))
-        newElement.style.borderWidth = 0.4 + 'rem'
+        newElement.style.borderWidth = 0.2 + 'rem'
         newElement.style.boxSizing = 'border-box'
         makeDraggable(newElement)
         inventorySl.appendChild(newElement)
@@ -716,10 +737,16 @@ function save(){
     link.href = URL.createObjectURL(blob);
     link.download = "InventoryData.json"
 
+    console.log(link.href)
+    console.log(link.download)
+
     saveInventory.appendChild(link)
     link.click()
     saveInventory.removeChild(link)
 }
+
+
+
 function checkRow(slotId, sum, objectY){
     if(slotId < 10 && sum < 10 && objectY < 4){
         console.log("stage 1")
@@ -772,7 +799,7 @@ function load(){
                         newElement.setAttribute("draggable",true)
                         newElement.setAttribute("value", object.name)
                         newElement.style.borderColor = setBorderColor(object)
-                        newElement.style.borderWidth = 0.4 + 'rem'
+                        newElement.style.borderWidth = 0.2 + 'rem'
                         newElement.style.boxSizing = 'border-box'
                         makeDraggable(newElement)
                         ObjectList.push(object)
@@ -848,6 +875,7 @@ function load(){
     });
 }
 
+/*
 function loadObject(){
     document.getElementById("jsonInputOne").addEventListener("change", function(event) {
         const file = event.target.files[0];
@@ -856,6 +884,7 @@ function loadObject(){
             reader.onload = function(e) {
                 try {
                     const jsonData = JSON.parse(e.target.result);
+                    const object = jsonData[0][0]
                     if(jsonData.length > 1){
                         alert("Save file contains multiple objects")
                     }else{
@@ -865,6 +894,7 @@ function loadObject(){
                                 return 0;
                             }
                         }
+                        console.log(object)
                         const newElement = document.createElement('div');
                         newElement.style.backgroundImage = `url("${object.url}")`
                         newElement.setAttribute("draggable",true)
@@ -887,4 +917,52 @@ function loadObject(){
         }
     });
 }
+*/
 
+async function readFromClipboard() {
+    try {
+        const text = await navigator.clipboard.readText();
+        console.log("Readed link:", text);
+    
+        if (text.startsWith("data:")) {
+          const base64Data = text.split(",")[1];
+          const jsonString = atob(base64Data);
+          const object = JSON.parse(jsonString);
+          
+          for(let i = 0;i < ObjectList.length;i++){
+            console.log("Iteration "+i)
+            if(ObjectList[i].name == object.name){
+                alert("Object has same name as yours! name: "+object.name)
+                return false
+            }
+          }
+
+          const newElement = document.createElement('div');
+            newElement.style.backgroundImage = `url("${object.url}")`
+            newElement.setAttribute("draggable",true)
+            newElement.setAttribute("value", object.name)
+            newElement.style.borderColor = setBorderColor(object)
+            newElement.style.borderWidth = 0.2 + 'rem'
+            newElement.style.boxSizing = 'border-box'
+            makeDraggable(newElement)
+            ObjectList.push(object)
+            if(object.sizeX > 0 || object.sizeY > 0){
+                newElement.setAttribute("class","object"+(object.sizeX+1)+"x"+(object.sizeY+1))
+            }else{
+                newElement.setAttribute("class","object")
+            }
+            document.querySelector("#slotTable").appendChild(newElement)
+            
+        } else {
+            alert("Text is not correct URL");
+          }
+      } catch (err) {
+        console.error("Error reading ",err);
+      }
+}
+
+function loadObject(){
+    document.getElementById("jsonInputOne").addEventListener("click", function(event) {
+        readFromClipboard()
+    })
+};
