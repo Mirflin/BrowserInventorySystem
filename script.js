@@ -547,9 +547,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 const saveBtn = document.querySelector("#saveInventory")
 
+/*
 saveBtn.addEventListener("click", (event) => {
     save()
 });
+*/
 
 function equipItem(draggableElem,droppedObject,droppedOnElement){
     const item = droppedOnElement
@@ -726,23 +728,31 @@ function makeDraggable(elem){
 })
 }
 
+let canClick = true
+
 function save(){
-    let money = [document.querySelector("#bronzeInput").value,document.querySelector("#silverInput").value,document.querySelector("#goldInput").value]
-    let saveData = [ObjectList,money]
-    let jsonObjects = JSON.stringify(saveData)
-    const blob = new Blob([jsonObjects], { type: "application/json" });
-    const saveInventory = document.querySelector("#saveInventory")
-    const link = document.createElement("a");
+    if(canClick){
+        let money = [document.querySelector("#bronzeInput").value,document.querySelector("#silverInput").value,document.querySelector("#goldInput").value]
+        let saveData = [ObjectList,money]
+        let jsonObjects = JSON.stringify(saveData)
+        const blob = new Blob([jsonObjects], { type: "application/json" });
+        const saveInventory = document.querySelector("#saveInventory")
+        const link = document.createElement("a");
 
-    link.href = URL.createObjectURL(blob);
-    link.download = "InventoryData.json"
+        link.href = URL.createObjectURL(blob);
+        link.download = "InventoryData.json"
 
-    console.log(link.href)
-    console.log(link.download)
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
 
-    saveInventory.appendChild(link)
-    link.click()
-    saveInventory.removeChild(link)
+        canClick = false
+
+        setTimeout(() => {
+            canClick = true;
+        }, 3000);
+    }
+    return 0;
 }
 
 
