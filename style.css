@@ -563,7 +563,6 @@ body{
     top: 5%;
     left: 15%;
     z-index: 20;
-
 }
 
 .opacityBackground{
@@ -612,11 +611,11 @@ body{
 
 #inventory #addItemDialog #Dialog form #rangeInput{
     width: 20rem;
-    height: auto;
+    height: 2rem;
     padding: 0;
 }
 #inventory #addItemDialog #Dialog form span #durabilityValue{
-    width: 3.2rem;
+    width: 3.3rem;
     margin-left: 1rem;
     font-size: 1.5rem;
     margin-bottom: 1rem;
@@ -789,10 +788,12 @@ body{
     width: 15rem;
     height: 15rem;
     margin-left: 2rem;
+    background-repeat: no-repeat;
 }
 #infoDialog #infoHeader #infoImage img{
     width: 15rem;
     height: 15rem;
+    background-repeat: no-repeat;
 }
 #infoDialog #infoDescription{
     border-top: 0.2rem solid var(--borderColor);
@@ -814,6 +815,15 @@ body{
     font-size: 2rem;
     font-family: Exec;
 }
+
+#infoDialog #infoTypeDurab #infoDurability #durabilityValue2{
+    width: 3.3rem;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
 #infoDialog #XSave{
     display: flex;
     justify-content: flex-start;

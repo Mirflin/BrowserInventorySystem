@@ -92,6 +92,8 @@ const closeInfo = document.querySelector("#infoClose")
 
 closeInfo.addEventListener('click', (event) =>{
     infoDialog.classList.add("disabled")
+    let object = ObjectList.find(object => object.name == mouseOn.getAttribute("value"))
+    object.durability = document.querySelector("#durabilityValue2").value
 });
 
 addButton.addEventListener("click", function(){
@@ -122,16 +124,23 @@ deleteObj.addEventListener('click',(event) =>{
 
 const addRangeInput = document.querySelector("#rangeInput")
 const addDurability = document.querySelector("#durabilityValue")
-addDurability.setAttribute("value",addRangeInput.value)
 
+addDurability.textContent = addRangeInput.value
 
 addRangeInput.addEventListener("input", (event) => {
+    const addRangeInput = document.querySelector("#rangeInput")
+    const addDurability = document.querySelector("#durabilityValue")
     addDurability.value = addRangeInput.value;
+    console.log("addRangeInput: "+addDurability.textContent)
 })
 
 addDurability.addEventListener("input", (event) => {
+    const addRangeInput = document.querySelector("#rangeInput")
+    const addDurability = document.querySelector("#durabilityValue")
     addRangeInput.value = addDurability.value;
-});
+    console.log("addDurability: "+addRangeInput.value)
+})
+
 
 const infoSave = document.querySelector("#infoSave")
 infoSave.addEventListener('click', (event)=>{
@@ -167,7 +176,7 @@ document.addEventListener("keydown", (event) => {
             document.querySelector("#infoImage").style.backgroundImage = `url("${object.url}")`
             
             document.querySelector("#typeValue").textContent = object.type
-            document.querySelector("#durabilityValue").textContent = object.durability
+            document.querySelector("#durabilityValue2").value = object.durability
             document.querySelector("#infoDescription").textContent = object.description
         }
     }
@@ -777,6 +786,7 @@ function checkRow(slotId, sum, objectY){
         return false;
     }
 }
+
 function checkAvaibility(object,slots,slotId){
     const objectX = object.sizeX
     const objectY = object.sizeY
@@ -819,6 +829,7 @@ function load(){
                             newElement.setAttribute("class","object")
                         }
                         let id = object.slotId
+                        let sum = parseInt(id)+parseInt(object.sizeX)
                         if(object.equip == true){
                             newElement.style.width = object.equipWidth
                             newElement.style.height = object.equipHeight
@@ -855,15 +866,15 @@ function load(){
                                     break;
                             }
                         }else{
-                            if(id < 20 && id > 9 && sum < 20 && droppedObject.sizeY < 3){
+                            if(id < 20 && id > 9 && sum < 20 && object.sizeY < 3){
                                 id = id - 10;
                                 newElement.style.gridRow = 2;
                             }
-                            else if(id < 30 && id > 19 && sum < 30 && droppedObject.sizeY < 2){
+                            else if(id < 30 && id > 19 && sum < 30 && object.sizeY < 2){
                                 id = id - 20;
                                 newElement.style.gridRow = 3;
                             }
-                            else if(id < 40 && id > 29 && sum < 40 && droppedObject.sizeY < 1){
+                            else if(id < 40 && id > 29 && sum < 40 && object.sizeY < 1){
                                 id = id - 30;
                                 newElement.style.gridRow = 4;
                             }else{
