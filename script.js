@@ -164,6 +164,7 @@ infoSave.addEventListener('click', (event)=>{
 })
 
 document.addEventListener("keydown", (event) => {
+
     const infoDialog = document.querySelector("#infoDialog")
     if (isHovered && event.key === "f") {
         if(infoDialog.classList == ""){
@@ -179,6 +180,28 @@ document.addEventListener("keydown", (event) => {
             document.querySelector("#durabilityValue2").value = object.durability
             document.querySelector("#infoDescription").textContent = object.description
         }
+
+    }
+  
+    if (isHovered && event.key === "r") {
+        let object = ObjectList.find(object => object.name == mouseOn.getAttribute("value"))
+        let divElement = mouseOn
+        let objectX = object.sizeX
+        let objectY = object.sizeY
+
+        if(objectX-1 > 0 || objectY-1 > 0 || objectX != objectY){
+            object.sizeX = objectY
+            object.sizeY = objectX
+            object.width = ((objectY+1) * 5.8)
+            object.height = ((objectX+1) * 5.8)
+            console.log("changed object: "+object)
+            updateArray(object,ObjectList)
+            console.log("object"+objectX+"x"+objectY)
+            divElement.classList.remove("object"+(objectX+1)+"x"+(objectY+1))
+            divElement.classList.add("object"+(objectY+1)+"x"+(objectX+1))
+            divElement.style.width = object.width + 'rem'
+            divElement.style.height = object.height + 'rem'
+        }
     }
 });
 
@@ -193,6 +216,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
 
         slot.addEventListener('drop', (event) => {
+            isDragged = false
             event.preventDefault();
             const data = event.dataTransfer.getData('text/plain');
             console.log(data)
@@ -554,6 +578,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
+
 const saveBtn = document.querySelector("#saveInventory")
 
 /*
@@ -717,6 +742,8 @@ function resetCreation(){
     console.log(document.querySelector("#durabilityValue"))
 }
 
+let isDragged = false
+
 function makeDraggable(elem){
     const element = elem;
 
@@ -734,6 +761,7 @@ function makeDraggable(elem){
         const foundedObj = ObjectList.find(object => object.name == value);
         event.dataTransfer.setData('text/plain', JSON.stringify(foundedObj));
         draggableElem = element;
+        isDragged = true
 })
 }
 
